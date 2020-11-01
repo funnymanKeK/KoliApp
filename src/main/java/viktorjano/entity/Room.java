@@ -24,9 +24,9 @@ public class Room {
 	private int id;
 	
 	@Column(nullable = false)
-	private int level;
+	private int levels;
 	
 	@Column(nullable = false)
-	private int number;
+	private int numbers;
 	
 }
