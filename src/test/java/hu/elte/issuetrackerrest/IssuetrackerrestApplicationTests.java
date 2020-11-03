@@ -1,10 +1,10 @@
-package viktorjano.KoliApp;
+package hu.elte.issuetrackerrest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class KoliAppApplicationTests {
+class IssuetrackerrestApplicationTests {
 
 	@Test
 	void contextLoads() {
