@@ -44,4 +44,44 @@ public class Schedule {
 	@Column(nullable = false)
 	private LocalDateTime toDate;
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public LocalDateTime getFromDate() {
+		return fromDate;
+	}
+
+	public void setFromDate(LocalDateTime fromDate) {
+		this.fromDate = fromDate;
+	}
+
+	public LocalDateTime getToDate() {
+		return toDate;
+	}
+
+	public void setToDate(LocalDateTime toDate) {
+		this.toDate = toDate;
+	}
+
 }
