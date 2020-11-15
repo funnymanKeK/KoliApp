@@ -23,6 +23,7 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 
+	/*
 	@PostMapping("")
 	public ResponseEntity<User> register(@RequestBody User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -31,6 +32,7 @@ public class UserController {
 		userRepository.save(user);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
+	*/
 
 	@GetMapping("/all")
 	public ResponseEntity<Iterable<User>> getAll() {
