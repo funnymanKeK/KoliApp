@@ -1,33 +1,64 @@
-HELP.md
-target/
+/KoliApp_back/HELP.md
+/KoliApp_back/target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
 ### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+/KoliApp_back/.apt_generated
+/KoliApp_back/.classpath
+/KoliApp_back/.factorypath
+/KoliApp_back/.project
+/KoliApp_back/.settings
+/KoliApp_back/.springBeans
+/KoliApp_back/.sts4-cache
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
+
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
-.vscode/
+# compiled output
+/KoliApp_front/dist
+/KoliApp_front/tmp
+/KoliApp_front/out-tsc
+# Only exists if Bazel was run
+/KoliApp_front/bazel-out
+
+# dependencies
+/KoliApp_front/node_modules
+
+# profiling files
+/KoliApp_front/chrome-profiler-events*.json
+/KoliApp_front/speed-measure-plugin*.json
+
+# IDEs and editors
+/KoliApp_front/.idea
+.project
+/KoliApp_front/.classpath
+/KoliApp_front/.c9/
+/KoliApp_front/*.launch
+/KoliApp_front/.settings/
+/KoliApp_front/*.sublime-workspace
+
+# IDE - VSCode
+/KoliApp_front/.vscode/*
+/KoliApp_front/!.vscode/settings.json
+/KoliApp_front/!.vscode/tasks.json
+/KoliApp_front/!.vscode/launch.json
+/KoliApp_front/!.vscode/extensions.json
+/KoliApp_front/.history/*
+
+# misc
+/KoliApp_front/.sass-cache
+/KoliApp_front/connect.lock
+/KoliApp_front/coverage
+/KoliApp_front/libpeerconnection.log
+/KoliApp_front/npm-debug.log
+/KoliApp_front/yarn-error.log
+/KoliApp_front/testem.log
+/KoliApp_front/typings
+
+# System Files
+/KoliApp_front/.DS_Store
+/KoliApp_front/Thumbs.db
