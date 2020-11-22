@@ -8,9 +8,9 @@ import { MatExpansionModule } from '@angular/material/expansion/';
 import { MatListModule } from '@angular/material/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { MatDatepicker } from '@angular/material/datepicker';
-
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -47,8 +47,9 @@ import { RoomCreatorComponent } from './room-creator/room-creator.component';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxMaterialTimepickerModule,
-    MatDatepicker
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
