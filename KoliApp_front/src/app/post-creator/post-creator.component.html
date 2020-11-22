@@ -1,23 +1,22 @@
-<form class="center" >
+<form [formGroup]="form" class="center" (submit)="submit()">
     <h2>Cím</h2>
-    <mat-form-field appearance="fill" style="width: 9cm;"> 
+    <mat-form-field appearance="fill" style="width: 9cm;">
         <mat-label>Input</mat-label>
-        <input matInput>
+        <input matInput required type="text" name="title" formControlName="title">
     </mat-form-field>
     <br>
     <h2>Szobaszám</h2>
     <mat-form-field appearance="fill">
         <mat-label>Select</mat-label>
         <mat-select>
-        <mat-option value="option">Option</mat-option>
+            <mat-option value="option">Option</mat-option>
         </mat-select>
     </mat-form-field>
     <br>
     <h2>Tartalom</h2>
     <mat-form-field appearance="fill" style="width: 9cm;">
         <mat-label>Textarea</mat-label>
-        <textarea matInput></textarea>
+        <textarea matInput required name ="description" formControlName ="description"></textarea>
     </mat-form-field>
-    <button mat-raised-button color="primary">Primary</button>
+    <button mat-raised-button color="primary">Beküld</button>
 </form>
-

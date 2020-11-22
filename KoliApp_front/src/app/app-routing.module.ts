@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { UsersComponent } from './users/users.component';
 import { PostComponent } from './post/post.component';
 import { PostCreatorComponent } from './post-creator/post-creator.component';
+import { RoomCreatorComponent } from './room-creator/room-creator.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'create-post',
     component: PostCreatorComponent
+  },
+  {
+    path: 'create-room',
+    component: RoomCreatorComponent
   }
 ];
 

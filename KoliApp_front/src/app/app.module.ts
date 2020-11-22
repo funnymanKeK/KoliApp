@@ -8,6 +8,9 @@ import { MatExpansionModule } from '@angular/material/expansion/';
 import { MatListModule } from '@angular/material/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepicker } from '@angular/material/datepicker';
+
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +20,8 @@ import { UsersComponent } from './users/users.component';
 import { PostComponent } from './post/post.component';
 import { PostCreatorComponent } from './post-creator/post-creator.component';
 import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RoomCreatorComponent } from './room-creator/room-creator.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,8 @@ import { MatInputModule } from '@angular/material/input';
     MenuComponent,
     UsersComponent,
     PostComponent,
-    PostCreatorComponent
+    PostCreatorComponent,
+    RoomCreatorComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +44,11 @@ import { MatInputModule } from '@angular/material/input';
     MatExpansionModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxMaterialTimepickerModule,
+    MatDatepicker
   ],
   providers: [],
   bootstrap: [AppComponent]
