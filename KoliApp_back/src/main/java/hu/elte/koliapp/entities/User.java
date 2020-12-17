@@ -52,6 +52,7 @@ public class User {
 	@JsonIgnore
 	private Room room;
 
+    @JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Post> posts;
 

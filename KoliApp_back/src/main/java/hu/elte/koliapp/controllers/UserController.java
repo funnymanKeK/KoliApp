@@ -34,7 +34,7 @@ public class UserController {
 	}
 	*/
 
-	@GetMapping("/all")
+	@GetMapping("")
 	public ResponseEntity<Iterable<User>> getAll() {
 		return ResponseEntity.ok(userRepository.findAll());
 	}
