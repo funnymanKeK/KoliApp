@@ -22,6 +22,7 @@ import { PostCreatorComponent } from './post-creator/post-creator.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoomCreatorComponent } from './room-creator/room-creator.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { RoomCreatorComponent } from './room-creator/room-creator.component';
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCardModule
+    MatCardModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
