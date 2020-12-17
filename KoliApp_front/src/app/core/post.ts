@@ -1,7 +1,11 @@
+import { User }  from './user';
+import { Comment }  from './comment';
+
+
 export interface Post {
-    username : string;
+    user : User;
     title : string;
     text : string;
     room : string;
-    comments: Array<string>;
+    comments: Array<Comment>;
 }
