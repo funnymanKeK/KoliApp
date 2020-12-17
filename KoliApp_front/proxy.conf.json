@@ -1,0 +1,9 @@
+{
+    "/api": {
+        "target": "http://google.com",
+        "secure": false,
+        "pathRewrite": {
+            "^/api": ""
+        }
+    }
+}

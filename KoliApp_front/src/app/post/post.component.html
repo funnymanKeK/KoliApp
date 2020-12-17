@@ -10,5 +10,18 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
     <p>{{post.text}}</p>
+    <h2 *ngIf="post.comments.length != 0">
+      Kommentek
+    </h2>
+    <mat-card *ngFor="let comment of post.comments">
+      {{comment}}
+    </mat-card>
+    <form [formGroup]="form" class="center" (submit)="submit()">
+      <mat-form-field appearance="fill">
+          <mat-label>Input</mat-label>
+          <input matInput required type="text" name="title" formControlName="title">
+      </mat-form-field>
+    </form>
+    <button mat-raised-button color="primary">Komment</button>
   </mat-expansion-panel>
 </mat-accordion>

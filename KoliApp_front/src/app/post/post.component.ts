@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from '../core/post';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PostService } from '../core/post.service';
 
 @Component({
   selector: 'app-post',
@@ -9,27 +11,27 @@ import { Post } from '../core/post';
 export class PostComponent implements OnInit {
 
 
-  posts: Post[] = [{
-    username: 'viktor',
-    title: 'teszt1',
-    text: 'Az Alföld az új idő negyedidőszakában a pleisztocén korban keletkezett.',
-    room: '103',
-  },{
-    username: 'viktor',
-    title: 'teszt2',
-    text: 'A terület tökéletes síkság, a szintkülönbségek elenyészőek. A felszínt a folyók munkája alakította.',
-    room: '235', 
-  },{
-    username: 'jano',
-    title: 'teszt3',
-    text: 'Barabás községtől északkeletre fekszik az Alföld legmagasabb, nem homokvidékekhez tartozó pontja.',
-    room: '342'
+  posts: Post[] = [];
+
+  public form: FormGroup = this.fb.group({
+    title: ['', Validators.required],
+    description: ['', Validators.required]
+  })
+
+  constructor(
+    private fb: FormBuilder,
+    private postService: PostService
+  ) { }
+
+  async ngOnInit(): Promise<void> {
+    this.posts = await this.postService.getPosts();
   }
-  ];
 
-  constructor() { }
-
-  ngOnInit(): void {
+  submit(): void {
+    if(!this.form.valid){
+      return;
+    }
+    console.log(this.form.value);
   }
 
 }
