@@ -9,25 +9,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import hu.elte.koliapp.entities.Comment;
-import hu.elte.koliapp.entities.Post;
 import hu.elte.koliapp.repositories.CommentRepository;
-import hu.elte.koliapp.repositories.PostRepository;
 
 @RestController
-@RequestMapping("/posts")
-public class PostController {
+@RequestMapping("/comments")
+public class CommentController {
 
 	@Autowired
-	private PostRepository postRepository;
-	
+	private CommentRepository commentRepository;
+
 	@GetMapping("")
-	public ResponseEntity<Iterable<Post>> getAll() {
-		return ResponseEntity.ok(postRepository.findAll());
+	public ResponseEntity<Iterable<Comment>> getAll() {
+		return ResponseEntity.ok(commentRepository.findAll());
 	}
-	
-    @PostMapping("")
-    public ResponseEntity<Post> insert(@RequestBody Post post) {
-        return ResponseEntity.ok(postRepository.save(post));
-    }
-	
+
+	@PostMapping("")
+	public ResponseEntity<Comment> insert(@RequestBody Comment comment) {
+		return ResponseEntity.ok(commentRepository.save(comment));
+	}
+
 }

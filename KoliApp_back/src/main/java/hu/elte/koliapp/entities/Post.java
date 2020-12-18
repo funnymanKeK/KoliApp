@@ -46,7 +46,6 @@ public class Post {
 
     @ManyToOne
     @JoinColumn
-    @JsonIgnore
 	private Room room;
     
     @ManyToMany

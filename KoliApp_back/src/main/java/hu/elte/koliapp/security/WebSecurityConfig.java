@@ -58,6 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/hello").permitAll()
                     .antMatchers("/h2/**").permitAll()
                     .antMatchers("/posts/**").permitAll()
+                    .antMatchers("/comments/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
 // //                .exceptionHandling().authenticationEntryPoint(WebSecurityConfig::handleException)

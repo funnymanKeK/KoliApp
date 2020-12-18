@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import org.springframework.scheduling.annotation.Schedules;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,14 +28,15 @@ public class Room {
 	private int id;
 
 	@Column(nullable = false)
-	private int levels;
+	private int level;
 
 	@Column(nullable = false)
-	private int numbers;
+	private int number;
 
 	@OneToMany(mappedBy = "room")
 	private List<User> users;
 	
+    @JsonIgnore
 	@OneToMany(mappedBy = "room")
 	private List<Post> posts;
 	
@@ -50,20 +51,20 @@ public class Room {
 		this.id = id;
 	}
 
-	public int getLevels() {
-		return levels;
+	public int getLevel() {
+		return level;
 	}
 
-	public void setLevels(int levels) {
-		this.levels = levels;
+	public void setLevel(int level) {
+		this.level = level;
 	}
 
-	public int getNumbers() {
-		return numbers;
+	public int getNumber() {
+		return number;
 	}
 
-	public void setNumbers(int numbers) {
-		this.numbers = numbers;
+	public void setNumbers(int number) {
+		this.number = number;
 	}
 
 	public List<User> getUsers() {
