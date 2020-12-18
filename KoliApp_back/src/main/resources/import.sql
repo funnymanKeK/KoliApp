@@ -1,4 +1,4 @@
-insert into room (levels, numbers) values (5, 555);
+insert into room (level, number) values (5, 555);
 
 insert into user (username, password, role, email, room_id) values ('admin', '$2a$10$Xtv0umJn1DDZ3ds5FTWHUOHuwJnRQ0qrYpTA1ANaRl8vdiwo1R1iW', 'ROLE_ADMIN', 'viktorvagyok@12.hu', 1);
 -- password: admin

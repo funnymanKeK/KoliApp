@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Post } from './post';
+import { User } from './user';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -19,4 +20,5 @@ export class PostService {
         const posts = await this.httpClient.get<Post[]>('/api/posts/').toPromise();
         return posts;
     }
+
 }
