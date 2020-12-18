@@ -1,5 +1,5 @@
 export interface Room {
 
-    level : string;
+    level : number;
     number : number;
 }

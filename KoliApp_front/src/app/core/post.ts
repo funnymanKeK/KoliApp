@@ -7,5 +7,5 @@ export interface Post {
     title : string;
     text : string;
     room : Room;
-    comments: Array<Comment>;
+    comments?: Array<Comment>;
 }
