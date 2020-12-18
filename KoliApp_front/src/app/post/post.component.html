@@ -19,10 +19,10 @@
       <form [formGroup]="form" class="center" (submit)="submit()">
         <mat-form-field appearance="fill">
             <mat-label>Input</mat-label>
-            <input matInput required type="text" name="title" formControlName="title">
+            <input matInput required type="text" name="text" formControlName="text">
         </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Komment</button>
       </form>
-      <button mat-raised-button color="primary">Komment</button>
     </mat-expansion-panel>
   </mat-accordion>
 </ng-container>

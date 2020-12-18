@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Post } from '../core/post';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostService } from '../core/post.service';
+import { CommentService } from '../core/comment.service';
+import { Comment } from '../core/comment';
 
 @Component({
   selector: 'app-post',
@@ -9,18 +11,16 @@ import { PostService } from '../core/post.service';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
-
-
   posts: Post[] = [];
 
   public form: FormGroup = this.fb.group({
-    title: ['', Validators.required],
-    description: ['', Validators.required]
+    text: ['', Validators.required]
   })
 
   constructor(
     private fb: FormBuilder,
-    private postService: PostService
+    private postService: PostService,
+    private commentService: CommentService
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -31,7 +31,12 @@ export class PostComponent implements OnInit {
     if(!this.form.valid){
       return;
     }
-    console.log(this.form.value);
+
+    const comment: Comment = {
+      text: this.form.get('text').value,
+    };
+
+    this.commentService.createComment(comment);
   }
 
 }
