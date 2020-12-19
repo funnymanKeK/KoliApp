@@ -20,6 +20,7 @@
         <mat-form-field appearance="fill">
             <mat-label>Input</mat-label>
             <input matInput required type="text" name="text" formControlName="text">
+            <input type="hidden" name="postId" value="{{post.id}}">
         </mat-form-field>
         <button mat-raised-button color="primary" type="submit">Komment</button>
       </form>

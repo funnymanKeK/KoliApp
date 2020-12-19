@@ -14,7 +14,7 @@ export class CommentService {
         private httpClient: HttpClient
     ) { }
 
-    async createComment(comment: Comment): Promise<void> {
-        await this.httpClient.post<Comment>('/api/comments', comment).toPromise();
+    async createComment(comment: Comment, postId: number): Promise<void> {
+        await this.httpClient.post<Comment>('/api/comments/', comment).toPromise();
     }
 }
