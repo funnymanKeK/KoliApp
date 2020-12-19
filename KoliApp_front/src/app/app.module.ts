@@ -23,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoomCreatorComponent } from './room-creator/room-creator.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     UsersComponent,
     PostComponent,
     PostCreatorComponent,
-    RoomCreatorComponent
+    RoomCreatorComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
