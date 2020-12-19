@@ -10,7 +10,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p>{{post.text}}</p>
-      <h2 *ngIf="post.comments.length != 0">
+      <h2 *ngIf="!!post.comments && post.comments.length != 0">
         Kommentek
       </h2>
       <mat-card *ngFor="let comment of post.comments">

@@ -33,7 +33,7 @@ export class PostComponent implements OnInit {
     }
 
     const comment: Comment = {
-      text: this.form.get('text').value,
+      text: this.form.value['text'],
     };
 
     this.commentService.createComment(comment);

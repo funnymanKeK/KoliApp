@@ -22,7 +22,7 @@ export class PostService {
     }
 
     async createPost(post: Post): Promise<void> {
-        await this.httpClient.post<Post>('/api/posts', post).toPromise();
+        await this.httpClient.post<Post>('/api/posts/', post).toPromise();
     }
 
 }

@@ -8,8 +8,13 @@
     <h2>Szobaszám</h2>
     <mat-form-field appearance="fill">
         <mat-label>Select</mat-label>
-        <mat-select>
-            <mat-option value="option">Option</mat-option>
+        <mat-select placeholder = "szobák"
+        [ngModelOptions]="{standalone: true}"
+        [(ngModel)]="selectedRoom">
+            <mat-option *ngFor = "let room of rooms" 
+            [value] = "room">
+            {{room.level}} -  {{room.number}}
+         </mat-option>
         </mat-select>
     </mat-form-field>
     <br>

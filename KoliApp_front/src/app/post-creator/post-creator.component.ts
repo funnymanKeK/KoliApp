@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Post } from '../core/post';
 import { PostService } from '../core/post.service';
 import { Room } from '../core/room';
+import { RoomService } from '../core/room.service';
 import { User } from '../core/user';
 
 @Component({
@@ -14,14 +15,24 @@ export class PostCreatorComponent implements OnInit {
 
   public form: FormGroup = this.fb.group({
     title: ['', Validators.required],
-    description: ['', Validators.required]
+    description: ['', Validators.required],
   })
 
   constructor(private fb: FormBuilder,
-    private postService : PostService) {
+    private postService : PostService,
+    private roomService : RoomService) {
   }
 
-  ngOnInit(): void {
+  public rooms: Room[] = [];
+  public selectedRoom: Room = {
+    level: 0,
+    number: 0,
+  };
+
+  async ngOnInit(): Promise<void> {
+    this.rooms = await this.roomService.getPosts();
+
+    
   }
 
   submit(): void {
@@ -33,20 +44,13 @@ export class PostCreatorComponent implements OnInit {
       username : 'Jani'
     }
 
-    const room: Room = {
-      level : 2,
-      number : 333,
-    }
-
     const post: Post = {
       user : user,
-      title : this.form.get('title').value,
-      room : room,
-      text : this.form.get('description').value,
+      title : this.form.value['title'],
+      room : this.selectedRoom,
+      text : this.form.value['description'],
     }
-
     this.postService.createPost(post);
-
   }
 
 }
