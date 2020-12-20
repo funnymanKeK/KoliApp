@@ -25,6 +25,7 @@ export class PostCreatorComponent implements OnInit {
 
   public rooms: Room[] = [];
   public selectedRoom: Room = {
+    id: 0,
     level: 0,
     number: 0,
   };
@@ -41,6 +42,7 @@ export class PostCreatorComponent implements OnInit {
     }
 
     const user: User = {
+      id: 1,
       username : 'Jani'
     }
 
