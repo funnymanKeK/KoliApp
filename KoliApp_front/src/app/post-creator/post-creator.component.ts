@@ -30,6 +30,9 @@ export class PostCreatorComponent implements OnInit {
     number: 0,
   };
 
+  showSuccess: boolean = false;
+  showError: boolean = false;
+
   async ngOnInit(): Promise<void> {
     this.rooms = await this.roomService.getPosts();
 
@@ -38,6 +41,7 @@ export class PostCreatorComponent implements OnInit {
 
   submit(): void {
     if(!this.form.valid){
+      this.showError = true;
       return;
     }
 
@@ -53,6 +57,7 @@ export class PostCreatorComponent implements OnInit {
       text : this.form.value['description'],
     }
     this.postService.createPost(post);
+    this.showSuccess= true;
   }
 
 }
