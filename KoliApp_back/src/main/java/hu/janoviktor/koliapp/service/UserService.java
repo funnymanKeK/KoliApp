@@ -49,6 +49,7 @@ public class UserService {
 		return AuthenticationResponse.builder().authenticationToken(token)
 				.refreshToken(refreshTokenService.generateRefreshToken().getToken())
 				.expiresAt(Instant.now().plusMillis(jwtProvider.getExpInMilis())).username(loginRequest.getUsername())
+				.id(this.requireByUsername(loginRequest.getUsername()).getUserId())
 				.build();
 	}
 
@@ -69,6 +70,11 @@ public class UserService {
 		    return user.getUserId();
 		}
 		return -1;
+	}
+	
+	private User requireByUsername(String username) {
+		User user = userRepository.findByUsername(username).orElseThrow(() -> new KoliAppException("No user found"));
+		return user;
 	}
 
 }

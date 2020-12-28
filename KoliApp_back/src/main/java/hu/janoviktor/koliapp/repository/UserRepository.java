@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import hu.janoviktor.koliapp.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-	Optional<User> findByUsername(String username);
-	User findByUserId(Long userId);
+	public Optional<User> findByUsername(String username);
+	public User findByUserId(Long userId);
 }
