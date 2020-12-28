@@ -18,7 +18,7 @@ import hu.janoviktor.koliapp.service.UserService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 @AllArgsConstructor
 public class UserController {
 
