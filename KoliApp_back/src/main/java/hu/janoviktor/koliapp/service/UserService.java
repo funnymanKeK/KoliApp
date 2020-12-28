@@ -2,7 +2,6 @@ package hu.janoviktor.koliapp.service;
 
 import java.time.Instant;
 
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -60,16 +59,6 @@ public class UserService {
 				.refreshToken(refreshTokenRequest.getRefreshToken())
 				.expiresAt(Instant.now().plusMillis(jwtProvider.getExpInMilis()))
 				.username(refreshTokenRequest.getUsername()).build();
-	}
-	
-	public long getCurrentUserId() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (!(authentication instanceof AnonymousAuthenticationToken)) {
-		    String currentUserName = authentication.getName();
-		    User user = userRepository.findByUsername(currentUserName).orElseThrow(()-> new KoliAppException("No user found!"));
-		    return user.getUserId();
-		}
-		return -1;
 	}
 	
 	private User requireByUsername(String username) {
