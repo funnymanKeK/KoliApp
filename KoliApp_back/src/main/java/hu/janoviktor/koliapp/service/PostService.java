@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import hu.janoviktor.koliapp.dto.PostCreateDto;
 import hu.janoviktor.koliapp.dto.PostDto;
 import hu.janoviktor.koliapp.entity.Post;
 import hu.janoviktor.koliapp.mapper.PostMapper;
@@ -25,8 +26,8 @@ public class PostService {
 	}
 
 	@Transactional
-	public Post save(Post post) {
-		return postRepository.save(post);
+	public Post save(PostCreateDto postCreateDto) {
+		return postRepository.save(postMapper.mapPostCreateDtoToPost(postCreateDto));
 	}
 
 }

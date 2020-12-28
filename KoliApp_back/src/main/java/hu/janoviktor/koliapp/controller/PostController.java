@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import hu.janoviktor.koliapp.dto.PostCreateDto;
 import hu.janoviktor.koliapp.dto.PostDto;
 import hu.janoviktor.koliapp.entity.Post;
 import hu.janoviktor.koliapp.service.PostService;
@@ -27,7 +28,7 @@ public class PostController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Post> insert(@RequestBody Post post) {
-		return ResponseEntity.ok(postService.save(post));
+	public ResponseEntity<Post> insert(@RequestBody PostCreateDto postCreateDto) {
+		return ResponseEntity.ok(postService.save(postCreateDto));
 	}
 }
