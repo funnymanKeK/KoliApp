@@ -6,21 +6,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import hu.janoviktor.koliapp.dto.CommentDto;
-import hu.janoviktor.koliapp.entity.Comment;
-import hu.janoviktor.koliapp.service.CommentService;
+import hu.janoviktor.koliapp.dto.ScheduleDto;
+import hu.janoviktor.koliapp.entity.Schedule;
+import hu.janoviktor.koliapp.service.ScheduleService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/comment")
+@RequestMapping("/schedule")
 @AllArgsConstructor
-public class CommentController {
+public class ScheduleController {
 
-	private final CommentService commentService;
-
+	private final ScheduleService scheduleService;
+	
 	@PostMapping
-	public ResponseEntity<Comment> insert(@RequestBody CommentDto commentDto) {
-		return ResponseEntity.ok(commentService.save(commentDto));
+	public ResponseEntity<Schedule> insert(@RequestBody ScheduleDto scheduleDto){
+		return ResponseEntity.ok(scheduleService.insert(scheduleDto));
 	}
-
+	
 }

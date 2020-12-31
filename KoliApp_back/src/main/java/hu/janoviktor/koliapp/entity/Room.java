@@ -27,7 +27,7 @@ public class Room {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 
 	@NotBlank(message = "level is required")
 	private int level;

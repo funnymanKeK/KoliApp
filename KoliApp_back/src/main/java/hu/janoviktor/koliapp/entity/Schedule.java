@@ -1,6 +1,6 @@
 package hu.janoviktor.koliapp.entity;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,9 +41,9 @@ public class Schedule {
 	private User user;
 
 	@NotBlank(message = "from date is required")
-	private LocalDateTime fromDate;
+	private Instant fromDate;
 
 	@NotBlank(message = "to date is required")
-	private LocalDateTime toDate;
+	private Instant toDate;
 
 }

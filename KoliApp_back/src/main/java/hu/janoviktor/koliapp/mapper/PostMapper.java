@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import hu.janoviktor.koliapp.dto.PostCreateDto;
 import hu.janoviktor.koliapp.dto.PostDto;
+import hu.janoviktor.koliapp.dto.ScheduleDto;
 import hu.janoviktor.koliapp.entity.Comment;
 import hu.janoviktor.koliapp.entity.Post;
 import hu.janoviktor.koliapp.entity.Room;
@@ -41,6 +42,35 @@ public abstract class PostMapper {
 			@Mapping(target = "user", expression = "java(getUserFromUserId(postCreateDto.getUserId()))"),
 			@Mapping(target = "text", source = "content"), })
 	public abstract Post mapPostCreateDtoToPost(PostCreateDto postCreateDto);
+
+	@Mappings({ @Mapping(target = "postId", ignore = true),
+			@Mapping(target = "comments", expression = "java(getEmptyComments())"),
+			@Mapping(target = "likes", expression = "java(getEmptyLikes())"),
+			@Mapping(target = "room", expression = "java(getRoom(scheduleDto.getRoomId()))"),
+			@Mapping(target = "text", expression = "java(getText(scheduleDto))"),
+			@Mapping(target = "title", expression = "java(getTitle(scheduleDto))"),
+			@Mapping(target = "user", expression = "java(getUserFromUserId(scheduleDto.getUserId()))"),})
+	public abstract Post mapScheduleDtoToPost(ScheduleDto scheduleDto);
+
+	protected String getText(ScheduleDto scheduleDto) {
+		return getRoom(scheduleDto.getRoomId()).getLevel() + " szinten lévő "
+				+ getRoom(scheduleDto.getRoomId()).getNumber() + " számú szobát lefoglalta "
+				+ getUserFromUserId(scheduleDto.getUserId()).getUsername() + "nevű felhasználó "
+				+ scheduleDto.getFromDate().toString() + "-tól " + scheduleDto.getToDate() + "-ig.";
+	}
+
+	protected String getTitle(ScheduleDto scheduleDto) {
+		return getRoom(scheduleDto.getRoomId()).getLevel() + " szinten lévő "
+				+ getRoom(scheduleDto.getRoomId()).getNumber() + " számú szobát lefoglalták";
+	}
+
+	protected List<Comment> getEmptyComments() {
+		return new ArrayList<Comment>();
+	}
+
+	protected List<User> getEmptyLikes() {
+		return new ArrayList<User>();
+	}
 
 	protected List<String> getComments(List<Comment> comments) {
 		List<String> res = new ArrayList<String>();

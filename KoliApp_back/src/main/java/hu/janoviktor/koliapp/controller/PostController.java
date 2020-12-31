@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import hu.janoviktor.koliapp.dto.LikeDto;
 import hu.janoviktor.koliapp.dto.PostCreateDto;
 import hu.janoviktor.koliapp.dto.PostDto;
+import hu.janoviktor.koliapp.dto.ScheduleDto;
 import hu.janoviktor.koliapp.entity.Post;
 import hu.janoviktor.koliapp.service.PostService;
 import lombok.AllArgsConstructor;
@@ -30,5 +32,15 @@ public class PostController {
 	@PostMapping
 	public ResponseEntity<Post> insert(@RequestBody PostCreateDto postCreateDto) {
 		return ResponseEntity.ok(postService.save(postCreateDto));
+	}
+	
+	@PostMapping("/schedule")
+	public ResponseEntity<Post> insert(@RequestBody ScheduleDto scheduleDto){
+		return ResponseEntity.ok(postService.save(scheduleDto));
+	}
+	
+	@PostMapping("/like")
+	public ResponseEntity<Post> like(@RequestBody LikeDto likeDto){
+		return ResponseEntity.ok(postService.save(likeDto));
 	}
 }
