@@ -16,6 +16,7 @@ public class PostDto {
 	private long id;
 	private String username;
 	private String title;
+	private String text;
 	private List<String> comments;
 	private String roomLevel;
 	private String roomNumber;
