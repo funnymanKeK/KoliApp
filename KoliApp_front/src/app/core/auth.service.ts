@@ -18,7 +18,7 @@ export class AuthService {
   }
 
   async login(username: string, password: string): Promise<void> {
-    const response = await this.httpClient.post<LoginResponse>('/api/api/auth/login', {'username': username, 'password': password}).toPromise();
+    const response = await this.httpClient.post<LoginResponse>('/api/auth/login', {'username': username, 'password': password}).toPromise();
     this.id = response.id;
     this.authenticated = response.id != null;
     this.token = response.refreshToken;
@@ -28,6 +28,6 @@ export class AuthService {
 
   async logout(): Promise<void> {
     this.authenticated = false;
-    await this.httpClient.post<any>('/api/api/auth/logout', {'username': this.username, 'refreshToken': this.token});
+    await this.httpClient.post<any>('/api/auth/logout', {'username': this.username, 'refreshToken': this.token});
   }
 }
