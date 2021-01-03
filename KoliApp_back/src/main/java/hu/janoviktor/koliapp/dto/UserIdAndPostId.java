@@ -9,12 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ScheduleDto {
+public class UserIdAndPostId {
 
-	private long scheduleId;
 	private long userId;
-	private long roomId;
-	private String fromDate;
-	private String toDate;
-	
+	private long postId;
+
 }

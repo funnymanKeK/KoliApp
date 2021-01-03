@@ -51,4 +51,6 @@ public class Post {
 	@ManyToMany
 	@JoinTable
 	private List<User> likes;
+	
+	private boolean archive;
 }

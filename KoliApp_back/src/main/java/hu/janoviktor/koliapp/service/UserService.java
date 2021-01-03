@@ -15,6 +15,7 @@ import hu.janoviktor.koliapp.dto.LoginRequest;
 import hu.janoviktor.koliapp.dto.RefreshTokenRequest;
 import hu.janoviktor.koliapp.dto.RegisterRequest;
 import hu.janoviktor.koliapp.entity.User;
+import hu.janoviktor.koliapp.entity.User.Role;
 import hu.janoviktor.koliapp.exception.KoliAppException;
 import hu.janoviktor.koliapp.repository.UserRepository;
 import hu.janoviktor.koliapp.security.JwtProvider;
@@ -37,6 +38,7 @@ public class UserService {
 		user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
 		user.setCreated(Instant.now());
 		user.setEnabled(true);
+		user.setRole(Role.ROLE_USER);
 		userRepository.save(user);
 	}
 

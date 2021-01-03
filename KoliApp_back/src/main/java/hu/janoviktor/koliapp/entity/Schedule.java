@@ -1,6 +1,6 @@
 package hu.janoviktor.koliapp.entity;
 
-import java.time.Instant;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,9 +41,9 @@ public class Schedule {
 	private User user;
 
 	@NotBlank(message = "from date is required")
-	private Instant fromDate;
+	private Date fromDate;
 
 	@NotBlank(message = "to date is required")
-	private Instant toDate;
+	private Date toDate;
 
 }

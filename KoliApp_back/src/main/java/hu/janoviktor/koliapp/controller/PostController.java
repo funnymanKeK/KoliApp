@@ -13,6 +13,7 @@ import hu.janoviktor.koliapp.dto.LikeDto;
 import hu.janoviktor.koliapp.dto.PostCreateDto;
 import hu.janoviktor.koliapp.dto.PostDto;
 import hu.janoviktor.koliapp.dto.ScheduleDto;
+import hu.janoviktor.koliapp.dto.UserIdAndPostId;
 import hu.janoviktor.koliapp.entity.Post;
 import hu.janoviktor.koliapp.service.PostService;
 import lombok.AllArgsConstructor;
@@ -33,14 +34,19 @@ public class PostController {
 	public ResponseEntity<Post> insert(@RequestBody PostCreateDto postCreateDto) {
 		return ResponseEntity.ok(postService.save(postCreateDto));
 	}
-	
+
 	@PostMapping("/schedule")
-	public ResponseEntity<Post> insert(@RequestBody ScheduleDto scheduleDto){
+	public ResponseEntity<Post> insert(@RequestBody ScheduleDto scheduleDto) {
 		return ResponseEntity.ok(postService.save(scheduleDto));
 	}
-	
+
 	@PostMapping("/like")
-	public ResponseEntity<Post> like(@RequestBody LikeDto likeDto){
+	public ResponseEntity<Post> like(@RequestBody LikeDto likeDto) {
 		return ResponseEntity.ok(postService.save(likeDto));
+	}
+
+	@PostMapping("/archive")
+	public ResponseEntity<Boolean> delete(@RequestBody UserIdAndPostId uap) {
+		return ResponseEntity.ok(postService.archive(uap));
 	}
 }

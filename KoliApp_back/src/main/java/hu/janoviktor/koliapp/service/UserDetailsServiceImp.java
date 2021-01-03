@@ -1,7 +1,8 @@
 package hu.janoviktor.koliapp.service;
 
-import java.util.Collection;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,9 +16,6 @@ import hu.janoviktor.koliapp.entity.User;
 import hu.janoviktor.koliapp.repository.UserRepository;
 import lombok.AllArgsConstructor;
 
-import static java.util.Collections.singletonList;
-
-
 @Service
 @AllArgsConstructor
 public class UserDetailsServiceImp implements UserDetailsService {
@@ -29,12 +27,12 @@ public class UserDetailsServiceImp implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Optional<User> userOptional = userRepository.findByUsername(username);
 		User user = userOptional.orElseThrow(() -> new UsernameNotFoundException("No usrename found"));
-		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-				user.isEnabled(), true, true, true, getAuthorities("USER"));
-	}
 
-	private Collection<? extends GrantedAuthority> getAuthorities(String role) {
-		return singletonList(new SimpleGrantedAuthority(role));
+		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+		grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
+
+		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+				user.isEnabled(), true, true, true, grantedAuthorities);
 	}
 
 }

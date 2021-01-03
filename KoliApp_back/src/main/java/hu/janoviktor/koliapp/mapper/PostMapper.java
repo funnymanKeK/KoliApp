@@ -40,7 +40,8 @@ public abstract class PostMapper {
 			@Mapping(target = "postId", ignore = true),
 			@Mapping(target = "room", expression = "java(getRoom(postCreateDto.getRoomId()))"),
 			@Mapping(target = "user", expression = "java(getUserFromUserId(postCreateDto.getUserId()))"),
-			@Mapping(target = "text", source = "content"), })
+			@Mapping(target = "text", source = "content"),
+			@Mapping(target = "archive", expression = "java(Boolean.FALSE)"), })
 	public abstract Post mapPostCreateDtoToPost(PostCreateDto postCreateDto);
 
 	@Mappings({ @Mapping(target = "postId", ignore = true),
@@ -49,7 +50,8 @@ public abstract class PostMapper {
 			@Mapping(target = "room", expression = "java(getRoom(scheduleDto.getRoomId()))"),
 			@Mapping(target = "text", expression = "java(getText(scheduleDto))"),
 			@Mapping(target = "title", expression = "java(getTitle(scheduleDto))"),
-			@Mapping(target = "user", expression = "java(getUserFromUserId(scheduleDto.getUserId()))"),})
+			@Mapping(target = "user", expression = "java(getUserFromUserId(scheduleDto.getUserId()))"),
+			@Mapping(target = "archive", expression = "java(Boolean.FALSE)"), })
 	public abstract Post mapScheduleDtoToPost(ScheduleDto scheduleDto);
 
 	protected String getText(ScheduleDto scheduleDto) {
@@ -96,8 +98,8 @@ public abstract class PostMapper {
 	}
 
 	protected User getUserFromUserId(long userId) {
-		User user = userRepository.findById(userId).orElseThrow(() -> new KoliAppException("No user found"));
-		return user;
+		User user = userRepository.findById(userId).orElseThrow(() -> new KoliAppException("No user found with user_id: " + userId));
+		return user; 
 	}
 
 	protected int getNumberOfLikes(Post post) {

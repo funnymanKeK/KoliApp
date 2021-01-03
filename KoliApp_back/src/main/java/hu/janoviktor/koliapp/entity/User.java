@@ -6,6 +6,8 @@ import java.time.Instant;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -60,4 +62,12 @@ public class User {
 	@ManyToMany(mappedBy = "likes")
 	@JsonIgnore
 	private List<Post> likedPosts;
+
+	@NotBlank(message = "Role must not be empty")
+	@Enumerated(EnumType.STRING)
+	private Role role;
+
+	public enum Role {
+		ROLE_USER, ROLE_ADMIN
+	}
 }

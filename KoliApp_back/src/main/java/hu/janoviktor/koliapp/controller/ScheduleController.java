@@ -23,4 +23,9 @@ public class ScheduleController {
 		return ResponseEntity.ok(scheduleService.insert(scheduleDto));
 	}
 	
+	@PostMapping("/check")
+	public ResponseEntity<Boolean> check(@RequestBody ScheduleDto scheduleDto){
+		return ResponseEntity.ok(scheduleService.check(scheduleDto));
+	}
+	
 }
