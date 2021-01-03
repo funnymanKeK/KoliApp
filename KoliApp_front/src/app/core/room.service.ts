@@ -13,7 +13,7 @@ export class RoomService {
     ) { }
 
     async getPosts(): Promise<Room[]> {
-        const rooms = await this.httpClient.get<Room[]>('/api/rooms/').toPromise();
+        const rooms = await this.httpClient.get<Room[]>('/api/room/').toPromise();
         return rooms;
     }
 }
