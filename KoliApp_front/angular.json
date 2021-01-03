@@ -35,7 +35,8 @@
               "src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": [ "node_modules/jquery/dist/jquery.min.js",
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
@@ -133,5 +134,8 @@
       }
     }
   },
-  "defaultProject": "koliappf"
+  "defaultProject": "koliappf",
+  "cli": {
+    "analytics": "0e0bcacb-0009-4e36-9044-d150ba56e21a"
+  }
 }
