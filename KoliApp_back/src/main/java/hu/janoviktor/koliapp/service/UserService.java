@@ -2,7 +2,6 @@ package hu.janoviktor.koliapp.service;
 
 import java.time.Instant;
 
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,6 +15,7 @@ import hu.janoviktor.koliapp.dto.LoginRequest;
 import hu.janoviktor.koliapp.dto.RefreshTokenRequest;
 import hu.janoviktor.koliapp.dto.RegisterRequest;
 import hu.janoviktor.koliapp.entity.User;
+import hu.janoviktor.koliapp.entity.User.Role;
 import hu.janoviktor.koliapp.exception.KoliAppException;
 import hu.janoviktor.koliapp.repository.UserRepository;
 import hu.janoviktor.koliapp.security.JwtProvider;
@@ -38,6 +38,7 @@ public class UserService {
 		user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
 		user.setCreated(Instant.now());
 		user.setEnabled(true);
+		user.setRole(Role.ROLE_USER);
 		userRepository.save(user);
 	}
 
@@ -60,16 +61,6 @@ public class UserService {
 				.refreshToken(refreshTokenRequest.getRefreshToken())
 				.expiresAt(Instant.now().plusMillis(jwtProvider.getExpInMilis()))
 				.username(refreshTokenRequest.getUsername()).build();
-	}
-	
-	public long getCurrentUserId() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (!(authentication instanceof AnonymousAuthenticationToken)) {
-		    String currentUserName = authentication.getName();
-		    User user = userRepository.findByUsername(currentUserName).orElseThrow(()-> new KoliAppException("No user found!"));
-		    return user.getUserId();
-		}
-		return -1;
 	}
 	
 	private User requireByUsername(String username) {

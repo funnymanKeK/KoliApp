@@ -4,7 +4,6 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +18,7 @@ import hu.janoviktor.koliapp.service.UserService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 @AllArgsConstructor
 public class UserController {
 
@@ -34,7 +33,7 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public AuthenticationResponse loginr(@RequestBody LoginRequest loginRequest) {
+	public AuthenticationResponse login(@RequestBody LoginRequest loginRequest) {
 		return userService.login(loginRequest);
 	}
 
@@ -49,8 +48,4 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.OK).body("Refresh Token Deleted Successfully!");
 	}
 	
-	@GetMapping("/current/user")
-	public ResponseEntity<Long> getCurrentUserId(){
-		return ResponseEntity.status(HttpStatus.OK).body(userService.getCurrentUserId());
-	}
 }
