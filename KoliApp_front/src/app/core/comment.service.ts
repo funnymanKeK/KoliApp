@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Post } from './post';
 import { User } from './user';
 import { Comment } from './comment';
 import { HttpClient } from '@angular/common/http';

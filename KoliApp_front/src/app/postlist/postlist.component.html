@@ -1,0 +1,10 @@
+<ng-container>
+    <mat-accordion>
+    <div *ngIf= "!!posts">
+        <app-post
+        *ngFor= "let post of posts"
+        [post]="post"
+        ></app-post>
+    </div>
+</mat-accordion>
+</ng-container>
