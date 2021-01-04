@@ -15,8 +15,6 @@ export class PostService {
     ) { }
     
     async getPosts(): Promise<Post[]> {
-        //szerintem ezután lehet törölni a this.posts-t úgy ahogy van
-        //ezt kommenteld ki, és ne a this.posts-ot hanem a posts-ot add vissza meg írd át az egyel lejjebbi sorban a '/posts'-ot a jó url-re
         const posts = await this.httpClient.get<Post[]>('/api/post/').toPromise();
         return posts;
     }

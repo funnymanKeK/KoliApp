@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UsersComponent } from './users/users.component';
-import { PostComponent } from './post/post.component';
+import { PostlistComponent } from './postlist/postlist.component';
 import { PostCreatorComponent } from './post-creator/post-creator.component';
 import { RoomCreatorComponent } from './room-creator/room-creator.component';
 import { LoginComponent } from './login/login.component';
@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'post',
-    component: PostComponent
+    component: PostlistComponent
   },
   {
     path: 'create-post',

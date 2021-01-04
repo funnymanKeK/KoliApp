@@ -4,9 +4,12 @@ import { Room }  from './room';
 
 export interface Post {
     id? : number;
-    user : User;
-    title : string;
-    text : string;
-    room : Room;
-    comments?: Array<Comment>;
+    creatorLiked: boolean,
+    numberOfLikes: number,
+    roomLevel: number,
+    roomNumber: number,
+    title: string,
+    text: string,
+    username: string,
+    comments?: Array<Comment>
 }
