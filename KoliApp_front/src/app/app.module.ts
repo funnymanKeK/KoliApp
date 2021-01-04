@@ -27,6 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoomCreatorComponent } from './room-creator/room-creator.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
+import { PostlistComponent } from './postlist/postlist.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { LoginComponent } from './login/login.component';
     PostComponent,
     PostCreatorComponent,
     RoomCreatorComponent,
-    LoginComponent
+    LoginComponent,
+    PostlistComponent
   ],
   imports: [
     BrowserModule,

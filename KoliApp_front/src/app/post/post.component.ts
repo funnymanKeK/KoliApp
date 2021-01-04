@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { Post } from '../core/post';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostService } from '../core/post.service';
@@ -11,7 +11,7 @@ import { Comment } from '../core/comment';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
-  posts: Post[] = [];
+  @Input() post: Post;
 
   public form: FormGroup = this.fb.group({
     text: ['', Validators.required]
@@ -21,10 +21,11 @@ export class PostComponent implements OnInit {
     private fb: FormBuilder,
     private postService: PostService,
     private commentService: CommentService
-  ) { }
+  ) { 
+  }
 
   async ngOnInit(): Promise<void> {
-    this.posts = await this.postService.getPosts();
+    
   }
 
   submit(): void {
@@ -41,5 +42,4 @@ export class PostComponent implements OnInit {
 
     this.commentService.createComment(comment, postId);
   }
-
 }
