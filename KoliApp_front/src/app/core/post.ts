@@ -3,7 +3,7 @@ import { Comment }  from './comment';
 import { Room }  from './room';
 
 export interface Post {
-    id? : number;
+    id : number;
     creatorLiked: boolean,
     numberOfLikes: number,
     roomLevel: number,

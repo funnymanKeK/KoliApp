@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostService } from '../core/post.service';
 import { CommentService } from '../core/comment.service';
 import { Comment } from '../core/comment';
+import { AuthService } from '../core/auth.service';
 
 @Component({
   selector: 'app-post',
@@ -11,7 +12,7 @@ import { Comment } from '../core/comment';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
-  @Input() post: Post;
+  @Input() post!: Post;
 
   public form: FormGroup = this.fb.group({
     text: ['', Validators.required]
@@ -20,9 +21,9 @@ export class PostComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private postService: PostService,
-    private commentService: CommentService
-  ) { 
-  }
+    private commentService: CommentService,
+    private authServive: AuthService
+  ) { }
 
   async ngOnInit(): Promise<void> {
     
@@ -40,6 +41,6 @@ export class PostComponent implements OnInit {
 
     const postId = this.form.value['postId']; 
 
-    this.commentService.createComment(comment, postId);
+    this.commentService.createComment(comment, this.authServive.id, this.post.id);
   }
 }
