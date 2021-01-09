@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Post } from './post';
 import { User } from './user';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from './auth.service';
 
 
 @Injectable({
@@ -11,7 +12,8 @@ import { HttpClient } from '@angular/common/http';
 export class PostService {
 
     constructor(
-        private httpClient: HttpClient
+        private httpClient: HttpClient,
+        private authService: AuthService
     ) { }
     
     async getPosts(): Promise<Post[]> {
@@ -19,8 +21,8 @@ export class PostService {
         return posts;
     }
 
-    async createPost(post: Post): Promise<void> {
-        await this.httpClient.post<Post>('/api/post/', post).toPromise();
+    async createPost(title: string, roomId: number, text: string): Promise<void> {
+        await this.httpClient.post<Post>('/api/post/', {title: title, roomId: roomId, content: text, userId: this.authService.id}).toPromise();
     }
 
 }

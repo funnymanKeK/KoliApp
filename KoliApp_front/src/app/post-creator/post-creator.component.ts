@@ -45,12 +45,7 @@ export class PostCreatorComponent implements OnInit {
       return;
     }
 
-    const user: User = {
-      id: 1,
-      username : 'Jani'
-    }
-
-    //this.postService.createPost(post);
+    this.postService.createPost(this.form.value['title'], this.selectedRoom.id, this.form.value['description']);
     this.showSuccess= true;
   }
 

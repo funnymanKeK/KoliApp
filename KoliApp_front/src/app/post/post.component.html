@@ -12,7 +12,7 @@
     Kommentek
     </h2>
     <mat-card *ngFor="let comment of post.comments">
-    {{comment.text}}
+    {{comment}}
     </mat-card>
     <form [formGroup]="form" class="center" (submit)="submit()">
     <mat-form-field appearance="fill">

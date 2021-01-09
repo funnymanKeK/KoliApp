@@ -35,12 +35,8 @@ export class PostComponent implements OnInit {
     }
     console.log(this.form.value);
 
-    const comment: Comment = {
-      text: this.form.value['text'],
-    };
-
     const postId = this.form.value['postId']; 
 
-    this.commentService.createComment(comment, this.authServive.id, this.post.id);
+    this.commentService.createComment(this.form.value['text'], this.post.id);
   }
 }
