@@ -4,6 +4,7 @@
         <app-post
         *ngFor= "let post of posts"
         [post]="post"
+        [postList]="this"
         ></app-post>
     </div>
 </mat-accordion>

@@ -5,6 +5,8 @@ import { PostService } from '../core/post.service';
 import { Room } from '../core/room';
 import { RoomService } from '../core/room.service';
 import { User } from '../core/user';
+import { AuthService } from '../core/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-creator',
@@ -18,9 +20,16 @@ export class PostCreatorComponent implements OnInit {
     description: ['', Validators.required],
   })
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private postService : PostService,
-    private roomService : RoomService) {
+    private roomService : RoomService,
+    private authService: AuthService,
+    private router: Router
+  ) {
+    if (!this.authService.authenticated) {
+      this.router.navigate(['/post']);
+    }
   }
 
   public rooms: Room[] = [];
@@ -38,13 +47,14 @@ export class PostCreatorComponent implements OnInit {
   }
 
   submit(): void {
-    if(!this.form.valid){
+    if(!this.form.valid || this.selectedRoom.id == 0){
       this.showError = true;
+      this.showSuccess = false;
       return;
     }
 
     this.postService.createPost(this.form.value['title'], this.selectedRoom.id, this.form.value['description']);
-    this.showSuccess= true;
+    this.showSuccess = true;
+    this.showError = false;
   }
-
 }

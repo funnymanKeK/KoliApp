@@ -4,6 +4,8 @@ import { MatDatepicker } from '@angular/material/datepicker';
 import { Room } from '../core/room';
 import { RoomService } from '../core/room.service';
 import { RoomCreatorService } from '../core/room-creator.service';
+import { AuthService } from '../core/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-room-creator',
@@ -17,6 +19,8 @@ export class RoomCreatorComponent implements OnInit {
     fromTime: ['', Validators.required],
     toTime: ['', Validators.required]
   })
+  showError: boolean = false;
+  showSuccess: boolean = false;
 
   public rooms: Room[] = [];
   public selectedRoom: Room = {
@@ -28,15 +32,27 @@ export class RoomCreatorComponent implements OnInit {
   constructor(
     private fb : FormBuilder,
     private roomService: RoomService,
-    private roomCreatorService: RoomCreatorService
-  ) { }
+    private roomCreatorService: RoomCreatorService,
+    private authService: AuthService,
+    private router: Router
+  ) {
+    if (!this.authService.authenticated) {
+      this.router.navigate(['/post']);
+    }
+  }
 
   async ngOnInit(): Promise<void> {
     this.rooms = await this.roomService.getRooms();
   }
 
   submit(){
-    console.log(this.form.value);
+    if (!this.form.valid || this.selectedRoom.id == 0) {
+      this.showError = true;
+      this.showSuccess = false;
+      return;
+    }
     this.roomCreatorService.createSchedule(this.selectedRoom.id, this.form.value['date'], this.form.value['fromTime'], this.form.value['toTime']);
+    this.showSuccess = true;
+    this.showError = false;
   }
 }

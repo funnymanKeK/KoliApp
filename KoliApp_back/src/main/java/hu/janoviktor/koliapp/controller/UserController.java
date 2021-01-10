@@ -29,7 +29,7 @@ public class UserController {
 	@PostMapping("/signup")
 
 	public ResponseEntity<Boolean> signup(@RequestBody RegisterRequest registerRequest) {
-		return  ResponseEntity.status(HttpStatus.OK).body(userService.signup(registerRequest));
+		return  ResponseEntity.ok(userService.signup(registerRequest));
 	}
 
 	@PostMapping("/login")

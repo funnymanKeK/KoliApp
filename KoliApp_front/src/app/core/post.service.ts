@@ -24,4 +24,8 @@ export class PostService {
     async createPost(title: string, roomId: number, text: string): Promise<void> {
         await this.httpClient.post<Post>('/api/post/', {'title': title, 'roomId': roomId, 'content': text, 'userId': this.authService.id}).toPromise();
     }
+    
+    async deletePost(postId: number): Promise<void> {
+        const response = await this.httpClient.post<any>('/api/post/archive', {'userId': this.authService.id, 'postId': postId}).toPromise();
+    }
 }

@@ -28,6 +28,7 @@ import { RoomCreatorComponent } from './room-creator/room-creator.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { PostlistComponent } from './postlist/postlist.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { PostlistComponent } from './postlist/postlist.component';
     PostCreatorComponent,
     RoomCreatorComponent,
     LoginComponent,
-    PostlistComponent
+    PostlistComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

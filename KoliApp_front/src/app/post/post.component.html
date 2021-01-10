@@ -8,13 +8,20 @@
     </mat-panel-description>
     </mat-expansion-panel-header>
     <p>{{post.text}}</p>
+    <div>
+      <button class="like" mat-icon-button color="basic" aria-label="Example icon button with a heart icon">
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <p class="like">{{post.numberOfLikes}}</p>
+    </div>
+    <button *ngIf="this.authService.isAdmin" mat-raised-button color="warn" (click)="delete()">Poszt törlése</button>
     <h2 *ngIf="!!post.comments && post.comments.length != 0">
     Kommentek
     </h2>
     <mat-card *ngFor="let comment of post.comments">
     {{comment}}
     </mat-card>
-    <form [formGroup]="form" class="center" (submit)="submit()">
+    <form *ngIf="this.authService.authenticated" [formGroup]="form" class="center" (submit)="submit()">
     <mat-form-field appearance="fill">
         <mat-label>Input</mat-label>
         <input matInput required type="text" name="text" formControlName="text">

@@ -8,6 +8,7 @@ import { LoginResponse } from './loginresponse';
 export class AuthService {
   public authenticated: boolean;
   public id?: number;
+  public isAdmin?: boolean;
   private token?: string;
   private username?: string;
 
@@ -23,7 +24,13 @@ export class AuthService {
     this.authenticated = response.id != null;
     this.token = response.refreshToken;
     this.username = response.username;
+    this.isAdmin = response.role == "ROLE_ADMIN";
     return this.authenticated;
+  }
+
+  async register(username: string, password: string): Promise<boolean> {
+    const response = await this.httpClient.post<boolean>('/api/auth/signup', {'username': username, 'password': password}).toPromise();
+    return response;
   }
 
   async logout(): Promise<void> {

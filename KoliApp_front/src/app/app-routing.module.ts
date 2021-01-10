@@ -5,6 +5,7 @@ import { PostlistComponent } from './postlist/postlist.component';
 import { PostCreatorComponent } from './post-creator/post-creator.component';
 import { RoomCreatorComponent } from './room-creator/room-creator.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   }
 ];
 

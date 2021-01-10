@@ -18,4 +18,8 @@ export class PostlistComponent implements OnInit {
     this.posts = await this.postService.getPosts();
     console.log(this.posts);
   }
+
+  async reload(): Promise<void> {
+    this.posts = await this.postService.getPosts();
+  } 
 }

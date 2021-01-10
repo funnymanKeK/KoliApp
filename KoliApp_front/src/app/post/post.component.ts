@@ -5,6 +5,8 @@ import { PostService } from '../core/post.service';
 import { CommentService } from '../core/comment.service';
 import { Comment } from '../core/comment';
 import { AuthService } from '../core/auth.service';
+import { Router } from '@angular/router';
+import { PostlistComponent } from '../postlist/postlist.component';
 
 @Component({
   selector: 'app-post',
@@ -13,6 +15,7 @@ import { AuthService } from '../core/auth.service';
 })
 export class PostComponent implements OnInit {
   @Input() post!: Post;
+  @Input() postList!: PostlistComponent;
 
   public form: FormGroup = this.fb.group({
     text: ['', Validators.required]
@@ -22,21 +25,29 @@ export class PostComponent implements OnInit {
     private fb: FormBuilder,
     private postService: PostService,
     private commentService: CommentService,
-    private authServive: AuthService
+    public authService: AuthService,
+    private router: Router
   ) { }
 
   async ngOnInit(): Promise<void> {
     
   }
 
-  submit(): void {
+  async submit(): Promise<void> {
     if(!this.form.valid){
       return;
     }
-    console.log(this.form.value);
 
     const postId = this.form.value['postId']; 
 
-    this.commentService.createComment(this.form.value['text'], this.post.id);
+    await this.commentService.createComment(this.form.value['text'], this.post.id);
+
+    this.postList.reload();
+  }
+
+  async delete(): Promise<void> {
+    await this.postService.deletePost(this.post.id);
+
+    this.postList.reload();
   }
 }

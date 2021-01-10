@@ -10,7 +10,8 @@
   </button>
   <mat-menu #menu="matMenu">
     <button *ngIf="!this.authService.authenticated" mat-menu-item (click)="this.toLogin()">Bejelentkezés</button>
-    <button *ngIf="this.authService.authenticated" mat-menu-item>Beállítások</button>
+    <button *ngIf="!this.authService.authenticated" mat-menu-item (click)="this.toRegister()">Regisztráció</button>
+    <button *ngIf="this.authService.authenticated" mat-menu-item>Jelszó módosítása</button>
     <button *ngIf="this.authService.authenticated" mat-menu-item (click)="this.logout()">Kijelentkezés</button>
   </mat-menu>
 </mat-toolbar>
