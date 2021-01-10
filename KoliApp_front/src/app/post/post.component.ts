@@ -21,6 +21,8 @@ export class PostComponent implements OnInit {
     text: ['', Validators.required]
   })
 
+  hasUserLiked: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private postService: PostService,
@@ -30,7 +32,9 @@ export class PostComponent implements OnInit {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    
+    if (this.authService.authenticated) {
+      this.hasUserLiked = await this.postService.hasUserLiked(this.post.id);
+    }
   }
 
   async submit(): Promise<void> {
@@ -49,5 +53,17 @@ export class PostComponent implements OnInit {
     await this.postService.deletePost(this.post.id);
 
     this.postList.reload();
+  }
+  
+  like(): void {
+    this.postService.like(this.post.id);
+
+    if (this.hasUserLiked) {
+      this.hasUserLiked = false;
+      this.post.numberOfLikes--;
+    } else {
+      this.hasUserLiked = true;
+      this.post.numberOfLikes++;
+    }
   }
 }

@@ -42,9 +42,8 @@ public class PostController {
 	}
 
 	@PostMapping("/like")
-	public ResponseEntity<String> like(@RequestBody LikeDto likeDto) {
-		postService.save(likeDto);
-		return new ResponseEntity<>("Like", HttpStatus.OK);
+	public ResponseEntity<Boolean> like(@RequestBody LikeDto likeDto) {
+		return ResponseEntity.ok(postService.save(likeDto));
 	}
 
 	@PostMapping("/archive")

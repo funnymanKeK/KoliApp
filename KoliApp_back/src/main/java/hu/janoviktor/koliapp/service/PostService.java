@@ -46,8 +46,9 @@ public class PostService {
 	}
 
 	@Transactional
-	public void save(LikeDto likeDto) {
+	public Boolean save(LikeDto likeDto) {
 		postRepository.save(likeMapper.mapLikeDtotoPost(likeDto));
+		return true;
 	}
 
 	@Transactional

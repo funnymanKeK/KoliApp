@@ -4,7 +4,6 @@ import { Room }  from './room';
 
 export interface Post {
     id : number;
-    creatorLiked: boolean,
     numberOfLikes: number,
     roomLevel: number,
     roomNumber: number,

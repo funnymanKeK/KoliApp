@@ -28,4 +28,13 @@ export class PostService {
     async deletePost(postId: number): Promise<void> {
         const response = await this.httpClient.post<any>('/api/post/archive', {'userId': this.authService.id, 'postId': postId}).toPromise();
     }
+
+    async hasUserLiked(postId: number): Promise<boolean> {
+        const response = await this.httpClient.post<boolean>('/api/post/liked', {'userId': this.authService.id, 'postId': postId}).toPromise();
+        return response;
+    }
+    
+    async like(postId: number): Promise<void> {
+        const response = await this.httpClient.post<any>('/api/post/like', {'userId': this.authService.id, 'postId': postId}).toPromise();
+    }
 }

@@ -8,13 +8,16 @@
     </mat-panel-description>
     </mat-expansion-panel-header>
     <p>{{post.text}}</p>
-    <div>
-      <button class="like" mat-icon-button color="basic" aria-label="Example icon button with a heart icon">
+    <div *ngIf="this.authService.authenticated">
+      <button *ngIf="!this.hasUserLiked" class="like" mat-icon-button color="basic" aria-label="Example icon button with a heart icon" (click)="like()">
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <button *ngIf="this.hasUserLiked" class="like" mat-icon-button color="warn" aria-label="Example icon button with a heart icon" (click)="like()">
         <mat-icon>favorite</mat-icon>
       </button>
       <p class="like">{{post.numberOfLikes}}</p>
     </div>
-    <button *ngIf="this.authService.isAdmin" mat-raised-button color="warn" (click)="delete()">Poszt törlése</button>
+    <button *ngIf="this.authService.isAdmin && this.authService.authenticated" mat-raised-button color="warn" (click)="delete()">Poszt törlése</button>
     <h2 *ngIf="!!post.comments && post.comments.length != 0">
     Kommentek
     </h2>
