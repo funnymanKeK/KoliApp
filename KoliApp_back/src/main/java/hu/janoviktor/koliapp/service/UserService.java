@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import hu.janoviktor.koliapp.dto.AuthenticationResponse;
 import hu.janoviktor.koliapp.dto.LoginRequest;
+import hu.janoviktor.koliapp.dto.NewPasswordDto;
 import hu.janoviktor.koliapp.dto.RefreshTokenRequest;
 import hu.janoviktor.koliapp.dto.RegisterRequest;
 import hu.janoviktor.koliapp.entity.User;
@@ -73,5 +74,14 @@ public class UserService {
 		User user = userRepository.findByUsername(username).orElseThrow(() -> new KoliAppException("No user found"));
 		return user.getRole().toString();
 	}
+
+	public Boolean changePassword(NewPasswordDto newPasswordDto) {
+		User user = userRepository.findById(newPasswordDto.getUserId()).orElseThrow(() -> new KoliAppException("No user found"));
+		user.setPassword(newPasswordDto.getNewPassword());
+		userRepository.save(user);
+		return true;
+	}
+	
+	
 
 }

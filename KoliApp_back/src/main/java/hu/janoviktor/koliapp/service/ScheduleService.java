@@ -29,6 +29,8 @@ public class ScheduleService {
 
 	public Boolean check(ScheduleDto scheduleDto) {
 		Boolean isGood = true;
+		if (stringToDate(scheduleDto.getFromDate()).after(stringToDate(scheduleDto.getToDate())))
+			return false;
 		ArrayList<Schedule> schedules = (ArrayList<Schedule>) scheduleRepository.findAll();
 		for (Schedule schedule : schedules) {
 			if (scheduleDto.getRoomId() == schedule.getRoom().getId()) {

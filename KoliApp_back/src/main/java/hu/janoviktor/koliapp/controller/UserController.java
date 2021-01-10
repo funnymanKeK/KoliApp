@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import hu.janoviktor.koliapp.dto.AuthenticationResponse;
 import hu.janoviktor.koliapp.dto.LoginRequest;
+import hu.janoviktor.koliapp.dto.NewPasswordDto;
 import hu.janoviktor.koliapp.dto.RefreshTokenRequest;
 import hu.janoviktor.koliapp.dto.RegisterRequest;
 import hu.janoviktor.koliapp.service.RefreshTokenService;
@@ -46,6 +47,11 @@ public class UserController {
 	public ResponseEntity<String> logout(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
 		refreshTokenService.deleteRefreshToken(refreshTokenRequest.getRefreshToken());
 		return ResponseEntity.status(HttpStatus.OK).body("Refresh Token Deleted Successfully!");
+	}
+	
+	@PostMapping("/password/change")
+	public ResponseEntity<Boolean> changePassword(@RequestBody NewPasswordDto newPasswordDto){
+		return ResponseEntity.status(HttpStatus.OK).body(userService.changePassword(newPasswordDto));
 	}
 	
 }
