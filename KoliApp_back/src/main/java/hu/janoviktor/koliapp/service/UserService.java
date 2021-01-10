@@ -34,16 +34,21 @@ public class UserService {
 
 	@Transactional
 	public Boolean signup(RegisterRequest registerRequest) {
-		if (userRepository.findByUsername(registerRequest.getUsername()) != null)
-			return false;
-		User user = new User();
-		user.setUsername(registerRequest.getUsername());
-		user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-		user.setCreated(Instant.now());
-		user.setEnabled(true);
-		user.setRole(Role.ROLE_USER);
-		userRepository.save(user);
-		return true;
+		Boolean success = false;
+		try {
+			requireByUsername(registerRequest.getUsername());
+		} catch (KoliAppException e) {
+			User user = new User();
+			user.setUsername(registerRequest.getUsername());
+			user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+			user.setCreated(Instant.now());
+			user.setEnabled(true);
+			user.setRole(Role.ROLE_USER);
+			userRepository.save(user);
+			success = true;
+		}
+		return success;
+		
 	}
 
 	public AuthenticationResponse login(LoginRequest loginRequest) {
