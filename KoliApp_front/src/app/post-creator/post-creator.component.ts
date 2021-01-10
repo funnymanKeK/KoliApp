@@ -34,9 +34,7 @@ export class PostCreatorComponent implements OnInit {
   showError: boolean = false;
 
   async ngOnInit(): Promise<void> {
-    this.rooms = await this.roomService.getPosts();
-
-    
+    this.rooms = await this.roomService.getRooms();
   }
 
   submit(): void {

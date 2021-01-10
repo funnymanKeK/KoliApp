@@ -22,7 +22,6 @@ export class PostService {
     }
 
     async createPost(title: string, roomId: number, text: string): Promise<void> {
-        await this.httpClient.post<Post>('/api/post/', {title: title, roomId: roomId, content: text, userId: this.authService.id}).toPromise();
+        await this.httpClient.post<Post>('/api/post/', {'title': title, 'roomId': roomId, 'content': text, 'userId': this.authService.id}).toPromise();
     }
-
 }

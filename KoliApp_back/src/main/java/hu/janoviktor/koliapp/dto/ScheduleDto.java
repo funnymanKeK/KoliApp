@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ScheduleDto {
 
-	private long scheduleId;
 	private long userId;
 	private long roomId;
 	private String fromDate;

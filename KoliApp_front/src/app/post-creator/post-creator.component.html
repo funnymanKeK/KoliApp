@@ -28,7 +28,7 @@
         <mat-select placeholder = "szobák"
         [ngModelOptions]="{standalone: true}"
         [(ngModel)]="selectedRoom">
-            <mat-option *ngFor = "let room of rooms" 
+            <mat-option *ngFor = "let room of rooms"
             [value] = "room">
             {{room.level}} -  {{room.number}}
          </mat-option>

@@ -17,13 +17,13 @@ export class AuthService {
     this.authenticated = false;
   }
 
-  async login(username: string, password: string): Promise<void> {
+  async login(username: string, password: string): Promise<boolean> {
     const response = await this.httpClient.post<LoginResponse>('/api/auth/login', {'username': username, 'password': password}).toPromise();
     this.id = response.id;
     this.authenticated = response.id != null;
     this.token = response.refreshToken;
     this.username = response.username;
-    console.log(response);
+    return this.authenticated;
   }
 
   async logout(): Promise<void> {
