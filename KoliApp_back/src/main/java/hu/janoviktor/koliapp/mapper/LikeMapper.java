@@ -24,8 +24,9 @@ public abstract class LikeMapper {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Mappings({ @Mapping(target = "comments", expression = "java(getCommentsById(likeDto.getPostId()))"),
-			@Mapping(target = "likes", expression = "java(getLikesById(likeDto.getPostId()))"),
+	@Mappings({ @Mapping(target = "archive", ignore = true),
+			@Mapping(target = "comments", expression = "java(getCommentsById(likeDto.getPostId()))"),
+			@Mapping(target = "likes", expression = "java(getLikesById(likeDto))"),
 			@Mapping(target = "room", expression = "java(getRoomById(likeDto.getPostId()))"),
 			@Mapping(target = "title", expression = "java(getTitleById(likeDto.getPostId()))"),
 			@Mapping(target = "text", expression = "java(getTextById(likeDto.getPostId()))"),
@@ -37,10 +38,15 @@ public abstract class LikeMapper {
 		return post.getComments();
 	}
 
-	protected List<User> getLikesById(long id) {
-		Post post = postRespotiry.findById(id).orElseThrow(() -> new KoliAppException("no post found"));
+	protected List<User> getLikesById(LikeDto likeDto) {
+		Post post = postRespotiry.findById(likeDto.getPostId())
+				.orElseThrow(() -> new KoliAppException("no post found"));
 		List<User> likes = post.getLikes();
-		likes.add(getUserById(post.getUser().getUserId()));
+		if (likes.contains(getUserById(likeDto.getUserId()))) {
+			likes.remove(getUserById(likeDto.getUserId()));
+		} else {
+			likes.add(getUserById(post.getUser().getUserId()));
+		}
 		return likes;
 	}
 

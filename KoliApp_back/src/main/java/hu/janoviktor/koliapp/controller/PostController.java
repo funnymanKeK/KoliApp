@@ -2,6 +2,7 @@ package hu.janoviktor.koliapp.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +27,8 @@ public class PostController {
 	private final PostService postService;
 
 	@GetMapping
-	public ResponseEntity<List<PostDto>> getAll() {
-		return ResponseEntity.ok(postService.getAll());
+	public ResponseEntity<List<PostDto>> getAll(@RequestBody long id) {
+		return ResponseEntity.ok(postService.getAll(id));
 	}
 
 	@PostMapping
@@ -41,8 +42,9 @@ public class PostController {
 	}
 
 	@PostMapping("/like")
-	public ResponseEntity<Post> like(@RequestBody LikeDto likeDto) {
-		return ResponseEntity.ok(postService.save(likeDto));
+	public ResponseEntity<String> like(@RequestBody LikeDto likeDto) {
+		postService.save(likeDto);
+		return new ResponseEntity<>("Like", HttpStatus.OK);
 	}
 
 	@PostMapping("/archive")

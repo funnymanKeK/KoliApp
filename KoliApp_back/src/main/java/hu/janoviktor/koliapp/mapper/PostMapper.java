@@ -29,12 +29,12 @@ public abstract class PostMapper {
 
 	@Mappings({ @Mapping(target = "id", source = "post.postId"),
 			@Mapping(target = "comments", expression = "java(getComments(post.getComments()))"),
-			@Mapping(target = "creatorLiked", expression = "java(didUserLiked(post))"),
+			@Mapping(target = "creatorLiked", expression = "java(didUserLike(post, id))"),
 			@Mapping(target = "numberOfLikes", expression = "java(getNumberOfLikes(post))"),
 			@Mapping(target = "username", expression = "java(getUserName(post))"),
 			@Mapping(target = "roomLevel", source = "post.room.level"),
 			@Mapping(target = "roomNumber", source = "post.room.number") })
-	public abstract PostDto mapPostToPostDto(Post post);
+	public abstract PostDto mapPostToPostDto(Post post, long id);
 
 	@Mappings({ @Mapping(target = "comments", ignore = true), @Mapping(target = "likes", ignore = true),
 			@Mapping(target = "postId", ignore = true),
@@ -87,10 +87,10 @@ public abstract class PostMapper {
 		return room;
 	}
 
-	protected boolean didUserLiked(Post post) {
+	protected boolean didUserLike(Post post, long id) {
 		boolean res = false;
 		for (User like : post.getLikes()) {
-			if (like.getUserId() == post.getUser().getUserId()) {
+			if (like.getUserId() == id) {
 				res = true;
 			}
 		}

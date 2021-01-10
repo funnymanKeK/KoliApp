@@ -1,7 +1,7 @@
 package hu.janoviktor.koliapp.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,9 +31,11 @@ public class PostService {
 	private final LikeMapper likeMapper;
 
 	@Transactional(readOnly = true)
-	public List<PostDto> getAll() {
-		List<PostDto> all = postRepository.findAll().stream().map(postMapper::mapPostToPostDto)
-				.collect(Collectors.toList());
+	public List<PostDto> getAll(long id) {
+		List<PostDto> all = new ArrayList<PostDto>();
+		for(Post post : postRepository.findAll()) {
+			all.add(postMapper.mapPostToPostDto(post, id));
+		}
 		all.removeIf(e -> e.isArchive());
 		return all;
 	}
@@ -44,8 +46,8 @@ public class PostService {
 	}
 
 	@Transactional
-	public Post save(LikeDto likeDto) {
-		return postRepository.save(likeMapper.mapLikeDtotoPost(likeDto));
+	public void save(LikeDto likeDto) {
+		postRepository.save(likeMapper.mapLikeDtotoPost(likeDto));
 	}
 
 	@Transactional
