@@ -27,8 +27,8 @@ public class PostController {
 	private final PostService postService;
 
 	@GetMapping
-	public ResponseEntity<List<PostDto>> getAll(@RequestBody long id) {
-		return ResponseEntity.ok(postService.getAll(id));
+	public ResponseEntity<List<PostDto>> getAll() {
+		return ResponseEntity.ok(postService.getAll());
 	}
 
 	@PostMapping
@@ -50,5 +50,10 @@ public class PostController {
 	@PostMapping("/archive")
 	public ResponseEntity<Boolean> delete(@RequestBody UserIdAndPostId uap) {
 		return ResponseEntity.ok(postService.archive(uap));
+	}
+	
+	@PostMapping("/liked")
+	public ResponseEntity<Boolean> likeCheck(@RequestBody UserIdAndPostId uap) {
+		return ResponseEntity.ok(postService.likeCheck(uap));
 	}
 }

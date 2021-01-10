@@ -21,7 +21,6 @@ public class PostDto {
 	private String roomLevel;
 	private String roomNumber;
 	private int numberOfLikes;
-	private boolean creatorLiked;
 	private boolean archive;
 	
 	

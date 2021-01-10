@@ -31,10 +31,10 @@ public class PostService {
 	private final LikeMapper likeMapper;
 
 	@Transactional(readOnly = true)
-	public List<PostDto> getAll(long id) {
+	public List<PostDto> getAll() {
 		List<PostDto> all = new ArrayList<PostDto>();
 		for(Post post : postRepository.findAll()) {
-			all.add(postMapper.mapPostToPostDto(post, id));
+			all.add(postMapper.mapPostToPostDto(post));
 		}
 		all.removeIf(e -> e.isArchive());
 		return all;
@@ -66,6 +66,18 @@ public class PostService {
 			return true;
 		}
 		return false;
+	}
+
+	public Boolean likeCheck(UserIdAndPostId uap) {
+		User user = userRepository.findById(uap.getUserId())
+				.orElseThrow(() -> new KoliAppException("No user found with user_id: " + uap.getUserId()));
+		Post post = postRepository.findById(uap.getPostId())
+				.orElseThrow(() -> new KoliAppException("No post found with user_id: " + uap.getUserId()));
+		if(post.getLikes().contains(user)) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 }

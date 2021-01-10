@@ -104,31 +104,6 @@ public class ControllerTest {
 		assertThat(response.getBody().size()).isEqualTo(0);
 	}
 
-	@Test
-	public void likingPost() throws Exception {
-		Post post = postRepository.findById(new Long(2)).orElseThrow();
-		post.setLikes(new ArrayList<User>());
-		post.setArchive(false);
-		postRepository.save(post);
-		ResponseEntity<List<PostDto>> response = restTemplate.exchange("http://localhost:" + port + "/post",
-				HttpMethod.GET, null, new ParameterizedTypeReference<List<PostDto>>() {
-				});
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(response.getBody().size()).isEqualTo(1);
-		assertThat(response.getBody().get(0).isCreatorLiked()).isEqualTo(false);
-
-		post = postRepository.findById(new Long(2)).orElseThrow();
-		List<User> likes = new ArrayList<User>();
-		likes.add(post.getUser());
-		post.setLikes(likes);
-		postRepository.save(post);
-		response = restTemplate.exchange("http://localhost:" + port + "/post", HttpMethod.GET, null,
-				new ParameterizedTypeReference<List<PostDto>>() {
-				});
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(response.getBody().size()).isEqualTo(1);
-		assertThat(response.getBody().get(0).isCreatorLiked()).isEqualTo(true);
-	}
 
 	@Test
 	public void commentingPost() throws Exception {
