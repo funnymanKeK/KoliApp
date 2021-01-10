@@ -28,9 +28,9 @@ public class UserController {
 
 	@PostMapping("/signup")
 
-	public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest) {
+	public ResponseEntity<Boolean> signup(@RequestBody RegisterRequest registerRequest) {
 		userService.signup(registerRequest);
-		return new ResponseEntity<>("User Registration Successful", HttpStatus.OK);
+		return  ResponseEntity.status(HttpStatus.OK).body(userService.signup(registerRequest));
 	}
 
 	@PostMapping("/login")
@@ -48,10 +48,10 @@ public class UserController {
 		refreshTokenService.deleteRefreshToken(refreshTokenRequest.getRefreshToken());
 		return ResponseEntity.status(HttpStatus.OK).body("Refresh Token Deleted Successfully!");
 	}
-	
+
 	@PostMapping("/password/change")
-	public ResponseEntity<Boolean> changePassword(@RequestBody NewPasswordDto newPasswordDto){
+	public ResponseEntity<Boolean> changePassword(@RequestBody NewPasswordDto newPasswordDto) {
 		return ResponseEntity.status(HttpStatus.OK).body(userService.changePassword(newPasswordDto));
 	}
-	
+
 }

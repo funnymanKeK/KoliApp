@@ -33,7 +33,9 @@ public class UserService {
 	private final JwtProvider jwtProvider;
 
 	@Transactional
-	public void signup(RegisterRequest registerRequest) {
+	public Boolean signup(RegisterRequest registerRequest) {
+		if (userRepository.findByUsername(registerRequest.getUsername()) != null)
+			return false;
 		User user = new User();
 		user.setUsername(registerRequest.getUsername());
 		user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
@@ -41,6 +43,7 @@ public class UserService {
 		user.setEnabled(true);
 		user.setRole(Role.ROLE_USER);
 		userRepository.save(user);
+		return true;
 	}
 
 	public AuthenticationResponse login(LoginRequest loginRequest) {
@@ -52,8 +55,7 @@ public class UserService {
 				.refreshToken(refreshTokenService.generateRefreshToken().getToken())
 				.expiresAt(Instant.now().plusMillis(jwtProvider.getExpInMilis())).username(loginRequest.getUsername())
 				.role(getRoleByName(loginRequest.getUsername()))
-				.id(this.requireByUsername(loginRequest.getUsername()).getUserId())
-				.build();
+				.id(this.requireByUsername(loginRequest.getUsername()).getUserId()).build();
 	}
 
 	public AuthenticationResponse refreshToken(RefreshTokenRequest refreshTokenRequest) {
@@ -64,24 +66,23 @@ public class UserService {
 				.expiresAt(Instant.now().plusMillis(jwtProvider.getExpInMilis()))
 				.username(refreshTokenRequest.getUsername()).build();
 	}
-	
+
 	private User requireByUsername(String username) {
 		User user = userRepository.findByUsername(username).orElseThrow(() -> new KoliAppException("No user found"));
 		return user;
 	}
-	
+
 	private String getRoleByName(String username) {
 		User user = userRepository.findByUsername(username).orElseThrow(() -> new KoliAppException("No user found"));
 		return user.getRole().toString();
 	}
 
 	public Boolean changePassword(NewPasswordDto newPasswordDto) {
-		User user = userRepository.findById(newPasswordDto.getUserId()).orElseThrow(() -> new KoliAppException("No user found"));
+		User user = userRepository.findById(newPasswordDto.getUserId())
+				.orElseThrow(() -> new KoliAppException("No user found"));
 		user.setPassword(newPasswordDto.getNewPassword());
 		userRepository.save(user);
 		return true;
 	}
-	
-	
 
 }
