@@ -41,7 +41,7 @@ public class ControllerTest {
 				HttpMethod.GET, null, new ParameterizedTypeReference<List<PostDto>>() {
 				});
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-		assertThat(response.getBody().size()).isEqualTo(1);
+		assertThat(response.getBody().size()).isEqualTo(0);
 	}
 
 	@Test

@@ -2,10 +2,12 @@ package hu.janoviktor.koliapp.service;
 
 import java.time.Instant;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,7 +50,7 @@ public class UserService {
 			success = true;
 		}
 		return success;
-		
+
 	}
 
 	public AuthenticationResponse login(LoginRequest loginRequest) {
@@ -85,7 +87,7 @@ public class UserService {
 	public Boolean changePassword(NewPasswordDto newPasswordDto) {
 		User user = userRepository.findById(newPasswordDto.getUserId())
 				.orElseThrow(() -> new KoliAppException("No user found"));
-		user.setPassword(newPasswordDto.getNewPassword());
+		user.setPassword(passwordEncoder.encode(newPasswordDto.getNewPassword()));
 		userRepository.save(user);
 		return true;
 	}

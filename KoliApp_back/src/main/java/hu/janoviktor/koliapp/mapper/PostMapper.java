@@ -56,7 +56,7 @@ public abstract class PostMapper {
 	protected String getText(ScheduleDto scheduleDto) {
 		return getRoom(scheduleDto.getRoomId()).getLevel() + " szinten lévő "
 				+ getRoom(scheduleDto.getRoomId()).getNumber() + " számú szobát lefoglalta "
-				+ getUserFromUserId(scheduleDto.getUserId()).getUsername() + "nevű felhasználó "
+				+ getUserFromUserId(scheduleDto.getUserId()).getUsername() + " nevű felhasználó "
 				+ scheduleDto.getFromDate().toString() + "-tól " + scheduleDto.getToDate() + "-ig.";
 	}
 
