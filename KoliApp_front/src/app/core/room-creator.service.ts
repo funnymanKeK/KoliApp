@@ -20,7 +20,7 @@ export class RoomCreatorService {
         return false;
     }
     await this.httpClient.post<any>('/api/schedule', {'userId': this.authService.id, 'roomId': roomId, 'fromDate': fromDate, 'toDate': toDate}).toPromise();
-    await this.httpClient.post<any>('/api/post/schedule', {'userId': 2, 'roomId': roomId, 'fromDate': fromDate, 'toDate': toDate}).toPromise();
+    await this.httpClient.post<any>('/api/post/schedule', {'userId': this.authService.id, 'roomId': roomId, 'fromDate': fromDate, 'toDate': toDate}).toPromise();
     return true;
   }
 }

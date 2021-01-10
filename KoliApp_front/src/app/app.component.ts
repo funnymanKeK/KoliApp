@@ -23,6 +23,11 @@ export class AppComponent {
     this.route.navigate(['/register']);
   }
 
+  toModifyPassword() {
+    console.log("xd");
+    this.route.navigate(['/modifypassword']);
+  }
+
   logout() {
     this.authService.logout();
   }

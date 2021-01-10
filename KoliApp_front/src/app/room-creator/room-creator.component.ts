@@ -45,14 +45,19 @@ export class RoomCreatorComponent implements OnInit {
     this.rooms = await this.roomService.getRooms();
   }
 
-  submit(){
+  async submit(){
     if (!this.form.valid || this.selectedRoom.id == 0) {
       this.showError = true;
       this.showSuccess = false;
       return;
     }
-    this.roomCreatorService.createSchedule(this.selectedRoom.id, this.form.value['date'], this.form.value['fromTime'], this.form.value['toTime']);
-    this.showSuccess = true;
-    this.showError = false;
+    const success = await this.roomCreatorService.createSchedule(this.selectedRoom.id, this.form.value['date'], this.form.value['fromTime'], this.form.value['toTime']);
+    if (success) {
+      this.showSuccess = true;
+      this.showError = false;
+    } else {
+      this.showSuccess = false;
+      this.showError = true;
+    }
   }
 }

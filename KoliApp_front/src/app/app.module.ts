@@ -29,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { PostlistComponent } from './postlist/postlist.component';
 import { RegisterComponent } from './register/register.component';
+import { ModifypasswordComponent } from './modifypassword/modifypassword.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { RegisterComponent } from './register/register.component';
     RoomCreatorComponent,
     LoginComponent,
     PostlistComponent,
-    RegisterComponent
+    RegisterComponent,
+    ModifypasswordComponent
   ],
   imports: [
     BrowserModule,

@@ -19,12 +19,15 @@ export class AuthService {
   }
 
   async login(username: string, password: string): Promise<boolean> {
-    const response = await this.httpClient.post<LoginResponse>('/api/auth/login', {'username': username, 'password': password}).toPromise();
-    this.id = response.id;
-    this.authenticated = response.id != null;
-    this.token = response.refreshToken;
-    this.username = response.username;
-    this.isAdmin = response.role == "ROLE_ADMIN";
+    try {
+      const response = await this.httpClient.post<LoginResponse>('/api/auth/login', {'username': username, 'password': password}).toPromise();
+      this.id = response.id;
+      this.authenticated = response.id != null;
+      this.token = response.refreshToken;
+      this.username = response.username;
+      this.isAdmin = response.role == "ROLE_ADMIN";
+    } catch (e) {
+    }
     return this.authenticated;
   }
 
@@ -33,8 +36,12 @@ export class AuthService {
     return response;
   }
 
+  async modifyPassword(password: string): Promise<void> {
+    await this.httpClient.post<boolean>('/api/auth/password/change', {'userId': this.id, 'newPassword': password}).toPromise();
+  }
+
   async logout(): Promise<void> {
     this.authenticated = false;
-    await this.httpClient.post<any>('/api/auth/logout', {'username': this.username, 'refreshToken': this.token});
+    await this.httpClient.post<any>('/api/auth/logout', {'username': this.username, 'refreshToken': this.token}).toPromise();
   }
 }

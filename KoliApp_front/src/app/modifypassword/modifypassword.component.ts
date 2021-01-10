@@ -4,15 +4,15 @@ import { AuthService } from '../core/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-modifypassword',
+  templateUrl: './modifypassword.component.html',
+  styleUrls: ['./modifypassword.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class ModifypasswordComponent implements OnInit {
 
   form: FormGroup = this.fb.group({
-    username: ['', Validators.required],
     password: ['', Validators.required],
+    passwordAgain: ['', Validators.required]
   })
 
   showErrorMessage: boolean = false;
@@ -30,13 +30,12 @@ export class LoginComponent implements OnInit {
     if(!this.form.valid){
       return;
     }
-    const success = await this.authService.login(this.form.value.username, this.form.value.password);
-    console.log(success);
-    if (success) {
-      this.router.navigate(['/post']);
-    } else {
+    if (this.form.value.password != this.form.value.passwordAgain) {
       this.showErrorMessage = true;
+      return;
     }
-  }
+    await this.authService.modifyPassword(this.form.value.password);
 
+    this.router.navigate(['/post']);
+  }
 }

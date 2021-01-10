@@ -6,6 +6,7 @@ import { PostCreatorComponent } from './post-creator/post-creator.component';
 import { RoomCreatorComponent } from './room-creator/room-creator.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ModifypasswordComponent } from './modifypassword/modifypassword.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'modifypassword',
+    component: ModifypasswordComponent
   }
 ];
 
